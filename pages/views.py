@@ -7,4 +7,17 @@ from django.http import HttpResponse #creates a response to url request within t
 def homePageView(request):
     """ responds to http request and returns an HttpResponse"""
 
-    return HttpResponse("Hello, world!")
+    s = ''' 
+    <html>
+    <head>
+        <title>Hello, world!</title>
+    </head>
+    <body>
+    <h1>Hello, world!</h1>
+    Welcome to our first Django application!
+    <p>
+    </body>
+    </html> 
+    '''
+
+    return HttpResponse(s)
