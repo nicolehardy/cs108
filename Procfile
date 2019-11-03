@@ -1,1 +1,1 @@
-web: gunicorn cs108.wsgi --log_file -
+web: gunicorn cs108.wsgi --log-file -
