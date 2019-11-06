@@ -1,3 +1,14 @@
-<h1>Showing all quotes</h1>
+<!-- templates/home.html-->
 
-{{ all_quotes_list }}
+<h1>Showing all quotes</h1>
+<!-- scriplet code displays value of the following variable-->
+<!--display value of this variable-->
+
+
+<ul>
+    {% for quote in all_quotes_list %}
+    <li>"{{quote.text}}" - {{quote.author}} <br>
+        <img src="{{quote.image_url}}" style="max-width: 400;">
+    </li>
+    {% endfor %}
+</ul> 
