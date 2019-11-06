@@ -8,4 +8,5 @@ urlpatterns = [
     #path('', homePageView, name='home') function based view
     path('', HomePageView.as_view(), name='home'), # generic class based view
     path('about/', AboutPageView.as_view(), name='about'), # generic class based view
+    
 ]
