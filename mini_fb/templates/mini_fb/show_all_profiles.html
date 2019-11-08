@@ -5,22 +5,22 @@
     <body>
     <h1>MiniFacebook</h1>
     <h3>Showing all profiles</h3>
-    <table border="1">
+    <table>
         <colgroup>
             <col span="1" style="width: 45%;">
             <col span="1" style="width: 50%;">
-            <col span="2" style="width: 50%;">
+            <col span="1" style="width: 50%;">
         </colgroup>    
         <tr>
             <td><b><center>Name</center></b></td>
             <td><b><center>Hometown</center></b></td>
-            <td><b><center>Image</center></b></td>
+            <td width ="50"><b><center>Image</center></b></td>
         </tr>
         {% for profile in showallprofiles %}
         <tr>
             <td>{{profile.firstname}} {{profile.lastname}}</td>
             <td>{{profile.city}}</td>
-            <td><img src="{{profile.image_url}}" style="max-width: 400;"></td><br>
+            <td height="100" ><img src="{{profile.image_url}}" style="max-width: 400;"></td><br>
         </tr>
         {% endfor %}
     </table>
