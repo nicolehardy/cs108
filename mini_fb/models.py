@@ -12,4 +12,4 @@ class Profile(models.Model):
     def __str__(self):
         """returns string representation of the object """
 
-        return "%s %s       %s" %(self.firstname, self.lastname, self.city)
+        return "%s %s" %(self.firstname, self.lastname)
