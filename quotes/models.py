@@ -8,6 +8,30 @@ class Person(models.Model):
     def __str__(self):
         '''reurn a string rep of the person'''
         return self.name
+    
+     #get image
+    def get_random_image(self):
+        '''return image of person'''
+        #get all images
+        images = Image.objects.filter(person=self.pk)
+        # pick on at random
+        i = random.randint(0, len(images) - 1)
+
+        return images[i]
+
+    def get_all_images(self):
+        '''return queryset of all images for one person'''
+        #get all images
+        #images = Image.objects.filter(person=self.pk)
+        images = Image.objects.filter(person=self.pk)
+        return images
+    
+
+    def get_all_quotes(self):
+        '''return queryset of all images for one person'''
+        #get all images
+        quotes = Quote.objects.filter(person=self.pk)
+        return quotes
 
 
 class Quote(models.Model):
@@ -22,26 +46,8 @@ class Quote(models.Model):
         """return a string rep of the object"""
         return '"%s" - %s' % (self.text, self.person.name)
 
-    #get image
-    def get_random_image(self):
-        '''return image of person'''
-        #get all images
-        images = Image.objects.filter(person=self.pk)
-        # pick on at random
-        i = random.randint(0, len(images)-1)
+   
 
-        return[i]
-
-    def get_all_images(self):
-        '''return queryset of all images for one person'''
-        #get all images
-        images = Image.objects.filter(person=self.pk)
-        return images
-    def get_all_quotes(self):
-        '''return queryset of all images for one person'''
-        #get all images
-        quotes = Quote.objects.filter(person=self.pk)
-        return quotes
 
 class Image(models.Model):
     '''Represent an image associate with a person'''
