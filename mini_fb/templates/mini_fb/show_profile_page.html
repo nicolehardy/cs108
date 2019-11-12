@@ -1,0 +1,48 @@
+<!-- templates/mini_fb/show_profile_page.html
+
+Single profile page view including status messages from the profile; includes header from base.html-->
+
+{% extends 'mini_fb/base.html' %}
+{% block content %}
+<img src= "{{profile_page.image_url}}" style="max-width: 600;">
+<table> <!-- displays all profile information -->
+    <tr>
+        
+        <td> <h2>{{profile_page.firstname}} {{profile_page.lastname}}</h2></td>
+    </tr>
+
+    <tr>
+        <td><b>Hometown:</b></td>
+        <td>{{profile_page.city}}</td>
+    </tr>
+    <tr>
+        <td><b>Contact:</b</td>
+        <td>{{profile_page.email}}</td>
+    </tr>
+</table>
+<h3><u>Status Messages</u></h3>
+<table border="1">
+        <colgroup>
+            <col span="1" style="width: 45%;">
+            <col span="1" style="width: 50%;">
+        </colgroup>
+    <tr>
+        <center>
+                <td><b>Time:</b></td>
+                <td><b>Message:</b></td>
+
+        </center>
+    </tr>
+    {% for status in profile_page.get_status_messages %} <!-- for loop using function defined under model to display profile 'status' mesages entered under admin-->
+    
+    <tr>
+        <td>{{status.timestamp}}</td>
+        <td>{{status.message}}</td>
+        
+    </tr>
+
+{% endfor %}
+</table>
+
+{% endblock %}
+
