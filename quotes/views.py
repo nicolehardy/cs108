@@ -1,6 +1,8 @@
 from django.shortcuts import render
 import random
+from django.views.generic.edit import CreateView, UpdateView
 from .models import Quote, Person
+from .forms import CreateQuoteForm, UpdateQuoteForm
 # Create your views here.
 
 from django.views.generic import ListView, DetailView
@@ -36,3 +38,14 @@ class PersonPageView(DetailView):
     model = Person
     template_name = 'quotes/person.html'
     context_object_name = 'person'
+
+class CreateQuoteView(CreateView):
+    ''' creates new quote and saves it to the database'''
+    form_class = CreateQuoteForm
+    template_name = "quotes/create_quote.html"
+class UpdateQuoteView(UpdateView):
+    ''' update quote and saves it to the database'''
+    form_class = UpdateQuoteForm
+    template_name = "quotes/update_quote.html"
+    queryset = Quote.objects.all()
+

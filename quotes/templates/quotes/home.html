@@ -1,4 +1,7 @@
 <!-- templates/home.html-->
+{% extends 'quotes/base.html' %}
+
+{% block content %}
 
 <h1>Showing all quotes</h1>
 <!-- scriplet code displays value of the following variable-->
@@ -12,3 +15,4 @@
     </li>
     {% endfor %}
 </ul> 
+{% endblock %}

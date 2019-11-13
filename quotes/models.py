@@ -1,6 +1,6 @@
 from django.db import models
 import random
-
+from django.urls import reverse #obtain url from pattern name
 # Create your models here.
 class Person(models.Model):
     ''' Encapsulates the concept of a person who said the quote'''
@@ -41,6 +41,12 @@ class Quote(models.Model):
     text = models.TextField(blank=True)
     person = models.ForeignKey('Person', on_delete="CASCADE")
     
+    def get_absolute_url(self):
+        '''return url to display newly added quote'''
+        return reverse("quote", kwargs={"pk":self.pk})
+
+
+
 
     def __str__(self):
         """return a string rep of the object"""
