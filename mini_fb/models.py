@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse #obtain url from pattern name
 
 # Create your models here.
 class Profile(models.Model): 
@@ -14,6 +15,9 @@ class Profile(models.Model):
         status = StatusMessage.objects.filter(profile=self.pk) # retrieves status message info stored in class StatusMessage
         return status
 
+    def get_absolute_url(self):
+        '''return url to display newly added profile''' # return url for django to redirect to using pk 
+        return reverse("show_profile_page", kwargs={"pk":self.pk})
 
     def __str__(self):
         """returns string representation of the profile name """

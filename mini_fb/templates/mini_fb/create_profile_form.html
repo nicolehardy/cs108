@@ -1,0 +1,28 @@
+<!-- mini_fb/create_profile.html-->
+{% extends 'mini_fb/base.html' %}
+{% block content %}
+<h2>Add a new profile: </h2>
+
+<form method='POST'>
+    {% csrf_token %}
+    <!--{{form}}-->
+    <table>
+    {% for field in form %}
+    <tr>
+        <th>{{field.name}}</th>
+        <td>{{field}}</td>
+    </tr>
+    {% endfor %}
+    <tr>
+        <td></td>
+        <td>
+        <input type='submit' name='Add Profile' value="Add Profile">
+        </td>
+    </tr>
+    
+    </table>
+</form>
+
+
+
+{% endblock %}

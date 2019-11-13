@@ -4,24 +4,25 @@ Single profile page view including status messages from the profile; includes he
 
 {% extends 'mini_fb/base.html' %}
 {% block content %}
-<img src= "{{profile_page.image_url}}" style="max-width: 600;">
+
 <table> <!-- displays all profile information -->
     <tr>
-        
-        <td> <h2>{{profile_page.firstname}} {{profile_page.lastname}}</h2></td>
-    </tr>
+        <td><img src= "{{profile_page.image_url}}" style="max-width: 500;"></td>
 
-    <tr>
-        <td><b>Hometown:</b></td>
-        <td>{{profile_page.city}}</td>
-    </tr>
-    <tr>
-        <td><b>Contact:</b</td>
-        <td>{{profile_page.email}}</td>
+        
+        <td> <h2>{{profile_page.firstname}} {{profile_page.lastname}}</h2>
+        <br>
+        <b>Hometown:</b> {{profile_page.city}}
+        <br>
+        <b>Contact:</b> {{profile_page.email}}</td>
     </tr>
 </table>
-<h3><u>Status Messages</u></h3>
-<table border="1">
+<p> <!--Change profile information-->
+    <a href="{% url 'update_profile' profile_page.pk %}">Update This Profile</a>
+</p>
+<hr>
+<h3><u>Status Messages</u></h3> <!--Displays status messages for this particular profile-->
+<table>
         <colgroup>
             <col span="1" style="width: 45%;">
             <col span="1" style="width: 50%;">
@@ -29,7 +30,7 @@ Single profile page view including status messages from the profile; includes he
     <tr>
         <center>
                 <td><b>Time:</b></td>
-                <td><b>Message:</b></td>
+                <td><b>Status:</b></td>
 
         </center>
     </tr>
@@ -40,8 +41,27 @@ Single profile page view including status messages from the profile; includes he
         <td>{{status.message}}</td>
         
     </tr>
+    {% endfor %}
+</table>
+<table>
+    <!-- For loop/form submission to post and display status messages through the web page instead of admin-->
+        <form method='POST' action='/mini_fb/profile/{{profile_page.pk}}/post_status'>
+            {% csrf_token %}
+            {% for field in create_status_form %}
+        <tr>
+            <th>{{field.name}}</th>
+            <td>{{field}}</td>
+        </tr>
+        <tr>
+                <td></td>
+                <td>
+                <input type='submit' name='Update Status' value="Update Status">
+                </td>
+        </tr>
+    {% endfor %}
+    </form>
+  
 
-{% endfor %}
 </table>
 
 {% endblock %}
