@@ -16,15 +16,23 @@ def create_status_message(request, pk):
 
         # read the data from this form submission
         message = request.POST['message']
-
+        
         # save the new status message object to the database
-        if message:
+        # if message:
 
-            sm = StatusMessage()
-            #sm.timestamp = timestamp
-            sm.profile = profile
-            sm.message = message
-            sm.save()
+        #     sm = StatusMessage()
+        #     #sm.timestamp = timestamp
+        #     sm.profile = profile
+        #     sm.message = message
+        #     sm.save()
+        form = CreateStatusMessageForm(request.POST or None, request.FILES or None)
+
+    # check if form is valid
+        if form.is_valid():
+            image = form.save(commit=False) # creates but doesnt save yet
+            image.profile = profile
+            image.message = message
+            image.save()
 
     # redirect the user to the show_profile_page view
     return redirect(reverse('show_profile_page', kwargs={'pk': pk}))

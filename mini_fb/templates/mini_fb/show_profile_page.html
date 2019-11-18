@@ -39,26 +39,30 @@ Single profile page view including status messages from the profile; includes he
     <tr>
         <td>{{status.timestamp}}</td>
         <td>{{status.message}}</td>
+        <td>{% if status.image %}
+            <img src='{{status.image.url}}' style='max-width: 600;'>
+            {% endif %}
+        </td>
         
     </tr>
     {% endfor %}
 </table>
 <table>
     <!-- For loop/form submission to post and display status messages through the web page instead of admin-->
-        <form method='POST' action='/mini_fb/profile/{{profile_page.pk}}/post_status'>
+        <form method='POST' action='/mini_fb/profile/{{profile_page.pk}}/post_status' enctype="multipart/form-data">
             {% csrf_token %}
             {% for field in create_status_form %}
         <tr>
             <th>{{field.name}}</th>
             <td>{{field}}</td>
         </tr>
-        <tr>
+        <tr> {% endfor %}  
                 <td></td>
                 <td>
                 <input type='submit' name='Update Status' value="Update Status">
-                </td>
+                </td> 
         </tr>
-    {% endfor %}
+  
     </form>
   
 

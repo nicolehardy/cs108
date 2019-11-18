@@ -23,6 +23,7 @@ class UpdateProfileForm(forms.ModelForm):
 
 class CreateStatusMessageForm(forms.ModelForm):
     ''' form to add new status to profile'''
+    image = forms.ImageField(label="Add Image", required=False)
     class Meta:
         model = StatusMessage
-        fields = ['message',] # fields from model that should use
+        fields = ['message', "image",] # fields from model that should use

@@ -30,6 +30,13 @@ class StatusMessage(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True) #auto generates time status posted using model class 
     message = models.TextField()
     profile = models.ForeignKey('Profile', on_delete=models.CASCADE) #links to Profile class using foreignkey
+    image = models.ImageField(blank=True)   # actual image  
+    # def __str__(self):
+    #     """return a string rep of the object"""
+    #     if self.image_url:
+    #         return self.image_url
+    #     else:
+    #         return self.image_file.url # url to the image file
 
     def __str__(self):
         ''' returns string representation of the status message to display'''
