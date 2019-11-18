@@ -1,7 +1,7 @@
 #mini_fb/urls.py
 
 from django.urls import path
-from .views import ShowAllProfilesView, ShowProfilePageView, CreateProfileView, UpdateProfileView, create_status_message #class def
+from .views import ShowAllProfilesView, ShowProfilePageView, CreateProfileView, UpdateProfileView, create_status_message, DeleteStatusMessageView #class def
 
 urlpatterns = [
     # map url in empty string to function view
@@ -11,4 +11,5 @@ urlpatterns = [
     path('create_profile', CreateProfileView.as_view(), name='create_profile'),
     path('profile/<int:pk>/update', UpdateProfileView.as_view(), name='update_profile'),
     path('profile/<int:pk>/post_status', create_status_message, name='post_status'), #function definition does not need to call parameters to map URL
+    path('profile/<int:profile_pk>/delete_status/<int:status_pk>', DeleteStatusMessageView.as_view(), name='delete_status'),
 ]

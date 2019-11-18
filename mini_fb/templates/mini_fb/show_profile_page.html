@@ -34,16 +34,16 @@ Single profile page view including status messages from the profile; includes he
 
         </center>
     </tr>
-    {% for status in profile_page.get_status_messages %} <!-- for loop using function defined under model to display profile 'status' mesages entered under admin-->
+    {% for message in profile_page.get_status_messages %} <!-- for loop using function defined under model to display profile 'status' mesages entered under admin-->
     
     <tr>
-        <td>{{status.timestamp}}</td>
-        <td>{{status.message}}</td>
-        <td>{% if status.image %}
-            <img src='{{status.image.url}}' style='max-width: 600;'>
+        <td>{{message.timestamp}}</td>
+        <td>{{message.message}}</td>
+        <td>{% if message.image %}
+            <img src='{{message.image.url}}' style='max-width: 600;'>
             {% endif %}
-        </td>
-        
+        </td> 
+        <td><a href="{% url 'delete_status' profile_pk=profile_page.pk status_pk=message.pk %}">delete</a></td>
     </tr>
     {% endfor %}
 </table>

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Profile, StatusMessage
 from .forms import CreateProfileForm, UpdateProfileForm, CreateStatusMessageForm
 from django.shortcuts import redirect
@@ -71,3 +71,35 @@ class UpdateProfileView(UpdateView): #takes current profile information, display
     form_class = UpdateProfileForm
     template_name = "mini_fb/update_profile_form.html"
     queryset = Profile.objects.all() 
+
+class DeleteStatusMessageView(DeleteView):
+    ''' Delete quote from the database'''
+    template_name = "mini_fb/delete_status_form.html"
+    queryset = StatusMessage.objects.all()
+
+    def get_context_data(self, **kwargs):
+        '''Return the context data (a dictionary) to be used in the template.'''
+        # obtain the default context data (a dictionary) from the superclass; 
+        # this will include the Profile record for this page view
+        context = super(DeleteStatusMessageView, self).get_context_data(**kwargs)
+        st_msg = StatusMessage.objects.get(pk=self.kwargs['status_pk'])
+        context['st_msg'] = st_msg
+        context['profile'] = st_msg.profile
+
+        return context 
+    
+    def get_object(self):
+        '''return status message to be deleted'''
+        # read the URL data values into variables
+        status_pk = self.kwargs['status_pk']
+        st_msg = StatusMessage.objects.get(pk=self.kwargs['status_pk'])
+        #profile = StatusMessage.objects.get(pk=self.kwargs['profile_pk'])
+        # find the StatusMessage object, and return it
+        return st_msg
+
+    def get_success_url(self): #redirect after delete
+        '''return url to redirect following deletion of status message'''
+        # get pk for profile
+        profile_pk = self.kwargs['profile_pk']
+        # reverse show profile page
+        return reverse('show_profile_page', kwargs={'pk':profile_pk})
