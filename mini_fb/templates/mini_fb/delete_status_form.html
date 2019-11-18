@@ -1,5 +1,7 @@
 <!-- templates/delete_status_form.html-->
-<h3>
+{% extends 'mini_fb/base.html' %}
+{% block content %}
+<h3 style="background:steelblue; color:white">
     Are you sure you want to delete this status message?
 </h3>
 <!-- {{statusmessage.timestamp}}{{statusmessage.message}} -->
@@ -16,3 +18,4 @@
     {% csrf_token %}
     <input type="submit" name="no" value="no">
 </form>
+{% endblock %}
