@@ -29,7 +29,7 @@ class StatusMessage(models.Model):
     and profile that posted the message. '''
     timestamp = models.DateTimeField(auto_now_add=True) #auto generates time status posted using model class 
     message = models.TextField()
-    profile = models.ForeignKey('Profile', on_delete="CASCADE") #links to Profile class using foreignkey
+    profile = models.ForeignKey('Profile', on_delete=models.CASCADE) #links to Profile class using foreignkey
 
     def __str__(self):
         ''' returns string representation of the status message to display'''

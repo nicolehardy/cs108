@@ -11,7 +11,8 @@
 <h3>- {{quote.person}}</h3>
 <img src="{{quote.person.get_random_image}}" style="max-width: 400;">
 <p>
-    <a href="{% url 'update_quote' quote.pk %}">Update This Quote</a>
+    <a href="{% url 'update_quote' quote.pk %}">Update This Quote</a> |
+    <a href="{% url 'delete_quote' quote.pk %}">Delete This Quote</a>
 </p>
 </center>
 {% endblock %}

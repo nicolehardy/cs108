@@ -10,7 +10,7 @@
 
 <ul>
     {% for quote in all_quotes_list %}
-    <li>"{{quote.text}}" - <a href="% url 'person' quote.person.pk %">{{quote.person}}</a> <br>
+    <li>"{{quote.text}}" - <a href="{% url 'person' quote.person.pk %}">{{quote.person}}</a> <br>
         <img src="{{quote.person.get_random_image}}" style="max-width: 400;">
     </li>
     {% endfor %}

@@ -39,7 +39,7 @@ class Quote(models.Model):
 
     # data attribute:
     text = models.TextField(blank=True)
-    person = models.ForeignKey('Person', on_delete="CASCADE")
+    person = models.ForeignKey('Person', on_delete=models.CASCADE)
     
     def get_absolute_url(self):
         '''return url to display newly added quote'''
@@ -57,10 +57,14 @@ class Quote(models.Model):
 
 class Image(models.Model):
     '''Represent an image associate with a person'''
-    image_url = models.URLField(blank=True)
-    person = models.ForeignKey('Person', on_delete="CASCADE")
-    
+    image_url = models.URLField(blank=True) # url as a string
+    person = models.ForeignKey('Person', on_delete=models.CASCADE)
+
+    image_file = models.ImageField(blank=True)   # actua image  
     def __str__(self):
         """return a string rep of the object"""
-        return self.image_url
+        if self.image_url:
+            return self.image_url
+        else:
+            return self.image_file.url # url to the image file
 
