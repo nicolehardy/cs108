@@ -9,21 +9,21 @@
     <body>
     <h2 style="background:steelblue; color:white">Showing all profiles:</h2>
     <table border="1"> 
-        <colgroup>
+        <!-- <colgroup>
             <col span="1" style="width: 45%;">
             <col span="1" style="width: 50%;">
             <col span="1" style="width: 50%;">
-        </colgroup>    
-        <tr>
+        </colgroup>     -->
+        <tr >
             <td><h3><b><center>Name</center></b></h3></td>
             <td><h3><b><center>Hometown</center></b></h3></td>
-            <td width ="50"><h3><b><center>Image</center></b></h3></td>
+            <td><h3><b><center>Image</center></b></h3></td>
         </tr>
         {% for profile in showallprofiles %} <!-- for loop to show all profiles in a table alongside hometown and smaller profile picture-->
         <tr>
             <td><a href="{% url 'show_profile_page' profile.pk %}">{{profile.firstname}} {{profile.lastname}}</a></td>
             <td>{{profile.city}}</td>
-            <td height="80" width="100"><a href="{% url 'show_profile_page' profile.pk %}"><img src="{{profile.image_url}}" style="max-width: 400;"></a></td><br>
+            <td ><a href="{% url 'show_profile_page' profile.pk %}"><img src="{{profile.image_url}}" style="max-height:300; width:200;"></a></td><br>
         </tr>
         {% endfor %}
     </table>

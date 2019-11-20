@@ -103,3 +103,8 @@ class DeleteStatusMessageView(DeleteView):
         profile_pk = self.kwargs['profile_pk']
         # reverse show profile page
         return reverse('show_profile_page', kwargs={'pk':profile_pk})
+
+class ShowNewsFeedView(DetailView):
+    '''displays news feed for a particular profile based on their friends'''
+    template_name = "mini_fb/show_news_feed.html"
+    queryset = StatusMessage.objects.all()

@@ -21,6 +21,28 @@ Single profile page view including status messages from the profile; includes he
     <a href="{% url 'update_profile' profile_page.pk %}">Update This Profile</a>
 </p>
 <hr>
+<h3 style="background:steelblue; color:white">Friends:</h3>
+{% if profile_page.get_friends %}
+<table>
+    <tr>
+    {% for friend in profile_page.get_friends %} <!-- for loop using function defined under model to display profile 'friends 'entered under admin-->
+    <!-- {{profile_page.get_friends}} -->
+    
+    <td><img src= "{{friend.image_url}}" style="width: 150; height:200"></td>
+    {% endfor %}
+    </tr>
+    <tr>
+        {% for friend in profile_page.get_friends %}
+        <td><a href="{% url 'show_profile_page' friend.pk %}"><center>{{friend.firstname}} {{friend.lastname}}</center></a></td>
+        {% endfor %}
+
+    </tr>
+    
+</table>
+{% else %}
+    {{profile_page.firstname}} doesn't have any friends. :(
+{% endif %}
+<hr>
 <h3 style="background:steelblue; color:white"><u>Status Messages</u></h3> <!--Displays status messages for this particular profile-->
 <table>
         <colgroup>
@@ -40,13 +62,13 @@ Single profile page view including status messages from the profile; includes he
         <td>{{message.timestamp}}</td>
         <td>{{message.message}}</td>
         <td>{% if message.image %}
-            <img src='{{message.image.url}}' style='max-width: 600;'>
+            <img src='{{message.image.url}}' style='max-width: 300; max-height:400'>
             {% endif %}
         </td> 
         <td><a href="{% url 'delete_status' profile_pk=profile_page.pk status_pk=message.pk %}">delete</a></td>
     </tr>
     {% endfor %}
-</table>
+</table> <hr>
 <table>
     <!-- For loop/form submission to post and display status messages through the web page instead of admin-->
         <form method='POST' action='/mini_fb/profile/{{profile_page.pk}}/post_status' enctype="multipart/form-data">

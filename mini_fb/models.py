@@ -9,6 +9,7 @@ class Profile(models.Model):
     city = models.TextField()
     email = models.TextField()
     image_url = models.URLField()
+    friends = models.ManyToManyField("self")
 
     def get_status_messages(self):
         '''Obtains status messages for a particular profile '''
@@ -18,6 +19,20 @@ class Profile(models.Model):
     def get_absolute_url(self):
         '''return url to display newly added profile''' # return url for django to redirect to using pk 
         return reverse("show_profile_page", kwargs={"pk":self.pk})
+
+    def get_friends(self):
+        '''method that returns a QuerySet of Friends for individual profile'''
+        #friend = Profile.objects.filter(profile=self.pk)
+        #return Profile.objects.filter(friends__excludes=self.pk)
+        friend = Profile.objects.filter(id=self.pk)[0] # gets rid of the query set
+        all_friends = friend.friends.all()
+        return all_friends
+
+    def get_news_feed(self):
+        '''method that obtains and returns news feed items'''
+        news = StatusMessage.objects.all().order_by("-timestamp")
+        return news
+
 
     def __str__(self):
         """returns string representation of the profile name """

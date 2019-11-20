@@ -5,8 +5,8 @@ from .models import Profile, StatusMessage
 
 class CreateProfileForm(forms.ModelForm):
     ''' form to add new profiles to database'''
-    first_name = forms.CharField(label="First Name", required=True)
-    last_name = forms.CharField(label="Last Name", required=True)
+    #first_name = forms.CharField(label="First Name", required=True)
+    #last_name = forms.CharField(label="Last Name", required=True)
     city = forms.CharField(label="Hometown", required=True)
     email = forms.CharField(label="Email", required=True)
     image_url = forms.CharField(label="Profile Photo", required=True)
