@@ -117,3 +117,15 @@ class ShowNewsFeedView(DetailView):
         #profile = StatusMessage.objects.get(pk=self.kwargs['profile_pk'])
         # find the StatusMessage object, and return it
         return newsfeed
+
+class ShowPossibleFriendsView(DetailView):
+    '''displays potential friends for a particular profiles'''
+    template_name = "mini_fb/show_possible_friends.html"
+    model = Profile
+
+def add_friend(request, profile_pk, friend_pk):
+    '''cutstom view function that allows friend requests outside admin'''
+    profile = Profile.objects.get(pk=profile_pk)
+    friend = Profile.objects.get(pk=friend_pk)
+    profile.friends.add(friend)
+    return redirect(reverse("show_profile_page", kwargs={'pk': profile_pk}))

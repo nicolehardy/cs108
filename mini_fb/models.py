@@ -30,9 +30,14 @@ class Profile(models.Model):
 
     def get_news_feed(self):
         '''method that obtains and returns news feed items'''
-        news = StatusMessage.objects.all().order_by("-timestamp")
+        news = StatusMessage.objects.filter(profile__in=self.friends.all()) | StatusMessage.objects.filter(profile=self.pk)
+        news = news.order_by("-timestamp")
         return news
 
+    def get_friend_suggestions(self):
+        '''method that obtains suggestions for friends for profiles'''
+        possible_friends = friend_suggestions = Profile.objects.exclude(pk__in=self.friends.all()).exclude(pk=self.pk)
+        return possible_friends
 
     def __str__(self):
         """returns string representation of the profile name """
