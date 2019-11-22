@@ -42,7 +42,9 @@ Single profile page view including status messages from the profile; includes he
 {% else %}
     {{profile_page.firstname}} doesn't have any friends. :(
 {% endif %}
-
+<p>
+    
+</p>
 <a href="{% url 'show_possible_friends' profile_page.pk %}">See Suggested Friends for {{profile_page.firstname}}</a>
 <hr>
 <h3 style="background:steelblue; color:white"><u>Status Messages</u></h3> <!--Displays status messages for this particular profile-->
