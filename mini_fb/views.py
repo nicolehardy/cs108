@@ -107,4 +107,13 @@ class DeleteStatusMessageView(DeleteView):
 class ShowNewsFeedView(DetailView):
     '''displays news feed for a particular profile based on their friends'''
     template_name = "mini_fb/show_news_feed.html"
-    queryset = StatusMessage.objects.all()
+    queryset = Profile.objects.all()
+
+    def get_object(self):
+        '''return news feed'''
+        # read the URL data values into variables
+        profile_pk = self.kwargs['profile_pk']
+        newsfeed = Profile.objects.get(pk=self.kwargs['profile_pk'])
+        #profile = StatusMessage.objects.get(pk=self.kwargs['profile_pk'])
+        # find the StatusMessage object, and return it
+        return newsfeed

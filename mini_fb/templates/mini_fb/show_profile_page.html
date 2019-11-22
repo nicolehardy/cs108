@@ -89,6 +89,6 @@ Single profile page view including status messages from the profile; includes he
   
 
 </table>
-
+<a href="{% url 'news_field' profile_page.pk %}">See {{profile_page.firstname}}'s news feed</a>
 {% endblock %}
 
