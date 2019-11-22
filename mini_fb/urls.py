@@ -12,7 +12,7 @@ urlpatterns = [
     path('profile/<int:pk>/update', UpdateProfileView.as_view(), name='update_profile'),
     path('profile/<int:pk>/post_status', create_status_message, name='post_status'), #function definition does not need to call parameters to map URL
     path('profile/<int:profile_pk>/delete_status/<int:status_pk>', DeleteStatusMessageView.as_view(), name='delete_status'),
-    path('profile/<int:profile_pk>/news_feed', ShowNewsFeedView.as_view(), name='news_field'),
+    path('profile/<int:profile_pk>/show_news_feed', ShowNewsFeedView.as_view(), name='news_field'),
     path('profile/<int:pk>/show_possible_friends', ShowPossibleFriendsView.as_view(), name='show_possible_friends'),
     path('profile/<int:profile_pk>/add_friend/<int:friend_pk>', add_friend, name='add_friend'),
     
