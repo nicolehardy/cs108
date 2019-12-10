@@ -1,0 +1,26 @@
+<!-- /templates/update_event.html-->
+{% extends 'project/base.html' %}
+{% block content %}
+<h2 style="color:forestgreen">Update Event: </h2>
+
+<form method='POST'>
+    {% csrf_token %}
+    <!--{{form}}-->
+    <table>
+    {% for field in form %}
+    <tr>
+        <th>{{field.name}}</th> <!--use form fields to create new profile-->
+        <td>{{field}}</td>
+    </tr>
+    {% endfor %}
+    <tr>
+        <td></td>
+        <td>
+        <input type='submit' name='Update Event' value="Update Event">
+        </td>
+    </tr>
+    
+    </table>
+</form>
+
+{% endblock %}

@@ -1,0 +1,36 @@
+<!-- templates/show_venue_page.html-->
+{% extends 'project/base.html' %}
+{% block content %}
+
+<center>
+   <h1>{{venue_page.venuename}} </h1>
+<hr>
+<table border="3">
+<tr>
+    <td><a href="{{venue_page.website}}"><img src="{{venue_page.image}}"></a></td>
+    <td>
+        {{venue_page.streetname}}<br>
+        {{venue_page.city}}, {{venue_page.state}}<br>
+        {{venue_page.zipcode}}
+        
+    </td>
+</tr>
+</table>
+<img src="https://image.flaticon.com/icons/svg/1150/1150626.svg" height="25" width="25"> <a href="{{venue_page.website}}">Venue Website Access </a>
+<hr>
+<table>
+<tr>
+    <td>
+        <h2><center>AMENITIES</center></h2>
+        <img src="https://image.flaticon.com/icons/svg/1414/1414367.svg" height="25" width="25"> Free Wifi Available: {{venue_page.wifi}} <br>
+        <img src="https://image.flaticon.com/icons/png/512/2100/2100969.png" height="25" width="25"> Handicap Accessible: {{venue_page.handicap}} <br>
+        <img src="https://image.flaticon.com/icons/svg/1291/1291395.svg" height="25" width="25"> Coat Check Available: {{venue_page.coatcheck}} <br>
+        <img src="https://image.flaticon.com/icons/svg/1161/1161644.svg" height="25" width="25"> Food Available in Venue: {{venue_page.food}} <br>
+        <img src="https://image.flaticon.com/icons/svg/2100/2100863.svg" height="25" width="25"> Parking Available: {{venue_page.parkinggarage}} <br>
+        
+    </td>
+</tr>
+
+</table> </center>
+
+{% endblock %}

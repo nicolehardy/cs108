@@ -1,0 +1,31 @@
+<!-- project/create_venue_form.html-->
+{% extends 'project/base.html' %}
+{% block content %}
+
+<h2>Add Venue: </h2>
+
+<form method='POST'>
+    {% csrf_token %}
+    <!--{{form}}-->
+    <table>
+    
+    <tr> {% for field in form %}
+        <td>{{field.label}}</td>
+        <td>{{field}}</td>
+    </tr> {% endfor %}
+
+
+    
+    <tr>
+        <td></td>
+        <td>
+                <br>
+        <input type='submit' name='Add Venue' value="Add Venue">
+        </td>
+    </tr>
+    
+    </table>
+</form>
+
+
+{% endblock %}

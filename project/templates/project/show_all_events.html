@@ -1,0 +1,28 @@
+<!-- /templates/show_all_events.html-->
+
+
+{% extends 'project/base.html' %}
+{% block content %}
+
+<center>
+<table border="1"> 
+        <!-- <colgroup>
+            <col span="1" style="width: 45%;">
+            <col span="1" style="width: 50%;">
+            <col span="1" style="width: 50%;">
+        </colgroup>     -->
+        <tr >
+            <td><h3><b><center>Name</center></b></h3></td>
+            <td><h3><b><center>Image</center></b></h3></td>
+            <td><h3><b><center>Venue</center></b></h3></td>
+        </tr>
+        {% for event in showevents %} <!-- for loop to show all profiles in a table alongside hometown and smaller profile picture-->
+        <tr>
+            <td><a href="{% url 'show_event' event.pk %}">{{event.eventname}}</a></td>
+            <td ><a href="{% url 'show_event' event.pk %}"><img src="{{event.image}}" style="max-height:300; width:200;"></a></td>
+            <td><a href="{% url 'show_venue' event.pk %}">{{event.venue}}</a></td>
+           <br>
+        </tr>
+    </table> </center>
+        {% endfor %}
+{% endblock %}

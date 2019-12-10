@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'pages',
     'quotes',
     'mini_fb',
+    'project',
+    'localflavor',
 ]
 
 MIDDLEWARE = [

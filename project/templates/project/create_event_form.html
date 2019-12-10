@@ -1,0 +1,27 @@
+<!-- /templates/create_event_form.html-->
+{% extends 'project/base.html' %}
+{% block content %}
+<h2>Add Event: </h2>
+
+<form method='POST'>
+    {% csrf_token %}
+    <!--{{form}}-->
+    <table>
+    
+    <tr> {% for field in form %}
+        <td>{{field.label}}</td>
+        <td>{{field}}</td>
+    </tr> {% endfor %}
+
+
+    
+    <tr>
+        <td></td>
+        <td>
+        <input type='submit' name='Add Event' value="Add Event">
+        </td>
+    </tr>
+    
+    </table>
+</form>
+{% endblock %}
