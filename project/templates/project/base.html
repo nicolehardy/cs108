@@ -3,16 +3,21 @@
 
 <html style="background-color:rgb(255, 255, 255);">
     <head>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> 
+
         <title>FEIS O'MATIC</title>
         <style type="text/css">* {cursor: url(http://cur.cursors-4u.net/cursors/cur-3/cur226.ani), url(http://cur.cursors-4u.net/cursors/cur-3/cur226.png), auto !important;}</style><a href="http://www.cursors-4u.com/cursor/2009/09/15/dark-green-glitter-pointer.html" target="_blank" title="Dark Green Glitter Pointer"><img src="http://cur.cursors-4u.net/cursor.png" border="0" alt="Dark Green Glitter Pointer" style="position:absolute; top: 0px; right: 0px;" /></a>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">    
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        
     </head>
 
     <body>
 
-        <header style="background-color:rgb(255, 255, 255)">
+        <header style="background-color:rgba(115, 255, 0, 0.356)">
                <center> <h1  style="color: forestgreen; font-size: xxx-large;"><a href="{% url 'show_events' %}"><img src="https://media.giphy.com/media/cZ0TMqrsSjvOP3Eg8F/giphy.gif" height="50"></a>
                 FEIS O'MATIC <a href="{% url 'show_events' %}"><img src="https://media.giphy.com/media/cZ0TMqrsSjvOP3Eg8F/giphy.gif" height="50"></a></h1>
+              | 
               <a href="{% url 'show_events' %}">EVENT LIST</a> |
               <a href="{% url 'create_event' %}">ADD EVENT</a> |
               <a href="{% url 'create_venue' %}">ADD VENUE</a> | 
