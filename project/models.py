@@ -6,17 +6,31 @@ class Event(models.Model):
     '''Stores information about each event including time, venue (fk) and dances available'''
     eventname = models.TextField()
     venue = models.ForeignKey('Venue', on_delete=models.CASCADE)
-    date = models.DateTimeField()
+    date = models.DateField()
+    date_time = models.TimeField(blank=True)
     website = models.URLField(blank=True)
     image = models.URLField(blank=True)
+    dances = models.ManyToManyField('Dance')
+    def showallevents(self):
+        '''captures all event objects and sorts them by date'''
+        event = Event.objects.all()
+        event = event.order_by("-date")
+
     def get_absolute_url(self):
         '''return url to display newly updated event'''
         return reverse("show_event", kwargs={"pk":self.pk})
     
     def get_venue_info(self):
         '''Obtains venue info for event'''
-        venue_info = Venue.objects.filter(venue_page=self.pk)
+        venue_info = Venue.objects.filter(id=self.pk)[0]
+
         return venue_info
+
+    def get_dances(self):
+        '''method that returns a QuerySet of dances for individual event'''
+        dance = Event.objects.filter(id=self.pk)[0] # gets rid of the query set
+        all_dances = dance.dances.all()
+        return all_dances
 
     def __str__(self):
         ''' returns string representation of the Event information to display. '''
@@ -39,6 +53,14 @@ class Venue(models.Model):
     food = models.TextField()
     parkinggarage = models.TextField()
 
+    def get_events(self):
+        '''Obtains events occurring at this venue'''
+        eventlist = Event.objects.filter(id=self.pk) # 
+        return eventlist
+
+    def get_absolute_url(self):
+        '''return url to display newly updated venue'''
+        return reverse("show_venue", kwargs={"pk":self.pk})
 
     def __str__(self):
         '''returns a string representation of the Venue information to display.'''

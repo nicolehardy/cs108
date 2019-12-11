@@ -2,11 +2,11 @@
 {% extends 'project/base.html' %}
 {% block content %}
 <center>
-<table border="1"> <!-- displays all profile information -->
+<table border="10"> <!-- displays all profile information -->
     
     <tr>
         <td> <center>
-            <h2 style="font-size: xx-large">{{event_page.eventname}} </h2>  
+            <h2 style="font-size: xx-large; color: forestgreen;">{{event_page.eventname}} </h2>  
         </center>
         </td>
     </tr>
@@ -28,27 +28,47 @@
     </tr>
 </table>
 <td><center><a href="{% url 'update_event' event_page.pk %}">UPDATE THIS EVENT</a></center></td>
-
+<br>
 
 <table border="1">
     <tr>
         <td>
-            VENUE:
+            <center><i><h3>VENUE</h3></i></center>
         </td>
-        <td>EVENT INFORMATION:</td>
+        <td><center><i><h3>EVENT INFORMATION</h3></i></center></td>
     </tr>
     <tr>
         <td>
-            <img src="{{event_page.venue.image}}"><br>
-            <a href="{% url 'show_venue' event_page.pk %}">{{event_page.venue}}</a>
+            <img src="{{event_page.venue.image}}" width="500"><br>
+            
         </td>
         <td>
-            <b>Event Date:</b> {{event_page.date}}<br>
-            <b>Website:</b> <a href="{{event_page.website}}">{{event_page.website}}</a><br>
-            <b></b>
+            <h3><b><center><a href="{% url 'show_venue' event_page.venue.pk %}">{{event_page.venue}}</a></b></center></h3>
+            <hr>
+            <h4><b>Event Date:</b></h4> {{event_page.date}}<hr>
+            <h4><b>Start Time:</b></h4> {{event_page.date_time}}<hr>
+            <h4><b>Website:</b></h4>  <a href="{{event_page.website}}">{{event_page.website}}</a>
         </td>
     </tr>
     
+</table>
+<table>
+    </td>
+
+        <p>
+        <h2><b>Dances Available:</b></h2> 
+        {% for dances_available in event_page.get_dances %} 
+        <hr>
+        <h3>{{dances_available.dance}}</h3> <br>
+            <center>
+                <iframe width="420" height="315"
+                    src="{{dances_available.video}}">
+                    </iframe></center> <br>
+            {{dances_available.description}}
+        <br>
+        {% endfor %} 
+        </p>
+    </td>
 </table>
 </center>
 {% endblock %} 

@@ -12,4 +12,5 @@ urlpatterns = [
     path('venue/<int:pk>', ShowVenueView.as_view(), name='show_venue'),
     path('event_list', ShowAllEventsView.as_view(), name='show_events'),
     path('event/<int:pk>/update', UpdateEventView.as_view(), name='update_event'),
+    path('venue/<int:pk>/update', UpdateVenueView.as_view(), name='update_venue'),
 ]

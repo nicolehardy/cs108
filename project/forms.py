@@ -1,20 +1,25 @@
 from django import forms
 from django.forms import widgets
-from .models import Event, Venue
+from .models import Event, Venue, Dance
 
 class CreateEventForm(forms.ModelForm):
     ''' form to add new events to database'''
 
     eventname = forms.CharField(label="Event Name:", required=True)
-    venue = forms.CharField(label="Venue Name:", required=True)
-    date_time = forms.DateTimeField(label="Start Time:", required=True)
-    date = forms.DateField(label="Event Date:", required=True)
+    venue = forms.ModelChoiceField(label="Venue Name:", required=True, queryset=Venue.objects.all())
+    CHOICES = [("12 a.m.", "12 a.m."),("1 a.m.", "1 a.m."),("2 a.m.", "2 a.m."),("3 a.m.", "3 a.m."),("4 a.m.", "4 a.m."),
+    ("5 a.m.", "5 a.m."),("6 a.m.", "6 a.m."),("7 a.m.", "7 a.m."),("8 a.m.", "8 a.m."),("9 a.m.", "9 a.m."),("10 a.m.", "10 a.m."),
+    ("11 a.m.", "11 a.m."),("12 p.m.", "12 p.m."),("1 p.m.", "1 p.m."),("2 p.m.", "2 p.m."),("3 p.m.", "3 p.m."),
+    ("4 p.m.", "4 p.m."),("5 p.m.", "5 p.m."),("6 p.m.", "6 p.m."),("7 p.m.", "7 p.m."),("8 p.m.", "8 p.m."),
+    ("9 p.m.", "9 p.m."),("10 p.m.", "10 p.m."),("11 p.m.", "11 p.m."),]
+    date_time = forms.ChoiceField(label="Start Time:", required=False, widget=forms.Select, choices=CHOICES)
+    date = forms.DateField(label="Event Date:", required=True, widget=forms.SelectDateWidget(years=range(2019,2020,2021)))
     website = forms.URLField(label="Website:", required=False)
-    image = forms.ImageField(label="Add Image of Event:", required=False)
+    image = forms.URLField(label="Add Event Image (URL):", required=False)
 
     class Meta:
         model = Event
-        fields = ['image', 'eventname', 'venue', 'date_time', 'date', 'website',]
+        fields = ['eventname', 'venue', 'date_time', 'date', 'website', 'image', 'dances']
     #image_url = forms.CharField(label="Profile Photo", required=True)
 
 class CreateVenueForm(forms.ModelForm):
@@ -32,8 +37,8 @@ class CreateVenueForm(forms.ModelForm):
     ("VT","Vermont"),("VA","Virginia"),("WA","Washington"),("WV","West Virginia"),("WI","Wisconsin"),("WY","Wyoming")]
     state = forms.ChoiceField(label="State:", required=True, choices=CHOICES, widget=forms.Select)
     zipcode = forms.CharField(label="Zip Code:", required=False, max_length="5")
-    image = forms.ImageField(label="Add Image of Venue:", required=False)
-    CHOICES = [('Yes','Yes'),('N','No')]
+    image = forms.URLField(label="Add Image of Venue:", required=False)
+    CHOICES = [('Yes','Yes'),('No','No')]
     handicap = forms.ChoiceField(label="Handicap Accessible?", required=False, choices=CHOICES, widget=forms.RadioSelect)
     wifi = forms.ChoiceField(label="Wifi Available?", required=False, choices=CHOICES, widget=forms.RadioSelect)
     coatcheck = forms.ChoiceField(label="Coat Check?", required=False, choices=CHOICES, widget=forms.RadioSelect)
@@ -53,4 +58,12 @@ class UpdateEventForm(forms.ModelForm):
     ''' form to update event information in the database'''
     class Meta:
         model = Event
-        fields = ['image', 'eventname', 'venue', 'date', 'website',] # fields from model that should use
+        fields = ['image', 'eventname', 'venue', 'date', 'website', 'dances'] # fields from model that should use
+
+
+class UpdateVenueForm(forms.ModelForm):
+    ''' form to update venue information in the database'''
+    class Meta:
+        model = Venue
+        fields = ['venuename', 'streetname', 'city', 'state', 
+        'zipcode', 'image', 'handicap', 'wifi', 'coatcheck', 'food', 'parkinggarage',] # fields from model that should use

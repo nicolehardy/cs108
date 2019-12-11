@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
 from .models import Event, Venue, Dance
-from .forms import CreateEventForm, CreateVenueForm, UpdateEventForm
+from .forms import CreateEventForm, CreateVenueForm, UpdateEventForm, UpdateVenueForm
+from django.urls import reverse
+from django.shortcuts import redirect
 # Create your views here.
 
 class HomePageView(ListView):
@@ -15,6 +17,21 @@ class AddEventView(CreateView):
     
     form_class = CreateEventForm
     template_name = "project/create_event_form.html"
+    queryset = Venue.objects.all()
+
+    def get_success_url(self): #redirect after creation
+        '''return url to redirect following creation of event'''
+        # get pk for event
+        #event_pk = self.kwargs['event_pk']
+        # reverse show event page
+        return reverse('show_event',args=(self.object.id,))
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        form.save()
+        return super(AddEventView, self).form_valid(form)
+
+
 
 class AddVenueView(CreateView):
     ''' Creates a new venue object to be added to the database. '''
@@ -22,6 +39,18 @@ class AddVenueView(CreateView):
     form_class = CreateVenueForm
     template_name = "project/create_venue_form.html"
 
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        form.save()
+        return super(AddVenueView, self).form_valid(form)
+
+    def get_success_url(self): #redirect after creation
+        '''return url to redirect following creation'''
+        # get pk for venue
+        # venue_pk = self.kwargs['venue.pk']
+        # reverse show venue page
+        # return reverse('venue_page', kwargs={'pk':venue_pk})
+        return reverse('show_venue',args=(self.object.id,))
 
 class ShowEventView(DetailView):
     '''create a subclass of DetailView to display single event page'''
@@ -29,6 +58,7 @@ class ShowEventView(DetailView):
     model = Event
     template_name = 'project/show_event_page.html'
     context_object_name = 'event_page'
+
 
 class ShowVenueView(DetailView):
     '''create a subclass of DetailView to display single venue page'''
@@ -54,3 +84,17 @@ class ShowDanceView(DetailView):
     ''' creates a subclass of DetailView to display information regarding dances at events'''
     model = Dance
     context_object_name = "dance"
+
+def add_dance(request, event_pk, dance_pk):
+    '''cutstom view function that allows friend requests outside admin'''
+    event = Event.objects.get(pk=event_pk)
+    dance = Dance.objects.get(pk=dance_pk)
+    event.dances.add(dance)
+    return redirect(reverse("show_event_page", kwargs={'pk': event_pk}))
+
+class UpdateVenueView(UpdateView): #takes current event information, displays it for user to edit and save to database as same event
+    ''' updates venue page using UpdateView class and saves it to the database'''
+    form_class = UpdateVenueForm
+    template_name = "project/update_venue.html"
+    queryset = Venue.objects.all() 
+

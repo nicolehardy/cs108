@@ -7,7 +7,7 @@
 <hr>
 <table border="3">
 <tr>
-    <td><a href="{{venue_page.website}}"><img src="{{venue_page.image}}"></a></td>
+    <td><a href="{{venue_page.website}}"><img src="{{venue_page.image}}" width="500" max-height="500"></a></td>
     <td>
         {{venue_page.streetname}}<br>
         {{venue_page.city}}, {{venue_page.state}}<br>
@@ -16,7 +16,8 @@
     </td>
 </tr>
 </table>
-<img src="https://image.flaticon.com/icons/svg/1150/1150626.svg" height="25" width="25"> <a href="{{venue_page.website}}">Venue Website Access </a>
+<img src="https://image.flaticon.com/icons/svg/1150/1150626.svg" height="25" width="25"> <a href="{{venue_page.website}}">Venue Website Access </a><br>
+<a href="{% url 'update_venue' venue_page.pk %}">UPDATE THIS VENUE</a>
 <hr>
 <table>
 <tr>
@@ -32,5 +33,19 @@
 </tr>
 
 </table> </center>
-
+<hr>
+<center>
+    <h2>
+        Events At This Venue:
+    </h2>
+    <table>
+    {% for event in venue_page.get_events %}
+        <tr>
+            
+            <td><a href="{% url 'show_event' event.pk %}"><img src="{{event.image}}" width="200" height="200"></a></td>
+            <td><a href="{% url 'show_event' event.pk %}">{{event.eventname}}</td></a>
+        </tr>
+        {% endfor %}
+    </table>
+</center>
 {% endblock %}
