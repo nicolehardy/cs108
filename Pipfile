@@ -9,6 +9,7 @@ pylint = "*"
 [packages]
 django = "*"
 gunicorn = "==19.9.0"
+django-localflavor = "*"
 
 [requires]
 python_version = "3.7"
