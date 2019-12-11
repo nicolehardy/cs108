@@ -1,4 +1,4 @@
-<!-- /templates/update_event.html-->
+<!-- /templates/project/update_event.html-->
 {% extends 'project/base.html' %}
 {% block content %}
 
@@ -10,7 +10,7 @@
     <table>
     {% for field in form %}
     <tr>
-        <th>{{field.name}}</th> <!--use form fields to create new profile-->
+        <th>{{field.name}}</th> <!--use form fields to update event information in each field-->
         <td>{{field}}</td>
     </tr>
     {% endfor %}
@@ -18,7 +18,7 @@
         <td></td>
         <td>
         <input type='submit' name='Update Event' value="Update Event">
-        </td>
+        </td> <!--takes updated information and submits it to the database-->
     </tr>
     
     </table>

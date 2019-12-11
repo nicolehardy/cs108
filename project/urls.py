@@ -4,7 +4,7 @@ from django.urls import path
 from .views import * #class def
 
 urlpatterns = [
-    # map url in empty string to function homepageview
+    # map url in string to necessary views for each page
     
     path('create_venue', AddVenueView.as_view(), name='create_venue'),
     path('create_event', AddEventView.as_view(), name='create_event'),

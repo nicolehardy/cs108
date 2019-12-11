@@ -1,20 +1,20 @@
-<!-- /templates/show_all_events.html-->
+<!-- /templates/project/show_all_events.html-->
 {% extends 'project/base.html' %}
 {% block content %}
-
+<!--main page for project website-->
 <center>
-    <b>Find and Add Upcoming Irish Dance Events! </b>
+    <b>Find and Add Upcoming Irish Dance Events! </b> <!--description of what the site is-->
 <table border="1"> 
         <tr>
-            <td><h3><b><center>Name</center></b></h3></td>
+            <td><h3><b><center>Name</center></b></h3></td> <!--Column names-->
             <td><h3><b><center>Image</center></b></h3></td>
             <td><h3><b><center>Venue</center></b></h3></td>
         </tr>
         {% for event in showevents %} <!-- for loop to show all events in a table alongside image and venue-->
         <tr>
-            <td><center><a href="{% url 'show_event' event.pk %}">{{event.eventname}}</a></center></td>
-            <td ><a href="{% url 'show_event' event.pk %}"><img src="{{event.image}}" style="max-height:300; width:200;"></a></td>
-            <td><center><a href="{% url 'show_venue' event.pk %}">{{event.venue}}</a></center></td>
+            <td><center><a href="{% url 'show_event' event.pk %}">{{event.eventname}}</a></center></td> <!--event name-->
+            <td ><a href="{% url 'show_event' event.pk %}"><img src="{{event.image}}" style="max-height:300; width:200;"></a></td> <!--user uploaded event picture-->
+            <td><center><a href="{% url 'show_venue' event.pk %}">{{event.venue}}</a></center></td> <!--venue designated for event-->
            <br>
         </tr>
     

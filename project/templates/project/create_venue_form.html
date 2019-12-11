@@ -1,15 +1,15 @@
-<!-- project/create_venue_form.html-->
+<!-- templates/project/create_venue_form.html-->
 {% extends 'project/base.html' %}
 {% block content %}
 
 <h2>Add Venue: </h2>
-
+<!-- page to add a new venue to the database using CreateView-->
 <form method='POST' >
     {% csrf_token %}
     <!--{{form}}-->
     <table>
     
-    <tr> {% for field in form %}
+    <tr> {% for field in form %} <!--loop for fields for form to use-->
         <td>{{field.label}}</td>
         <td>{{field}}</td>
     </tr> {% endfor %}
@@ -21,7 +21,7 @@
         <td>
                 <br>
         <input type='submit' name='Add Venue' value="Add Venue">
-        </td>
+        </td> <!--formatted submit form in separate row-->
     </tr>
     
     </table>

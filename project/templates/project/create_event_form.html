@@ -1,15 +1,15 @@
-<!-- /templates/create_event_form.html-->
+<!-- /templates/project/create_event_form.html-->
 {% extends 'project/base.html' %}
 {% block content %}
 
 <h2>Add Event: </h2>
-
+<!-- page to add a new event to the database using CreateView-->
 <form method='POST'>
     {% csrf_token %}
     <!--{{form}}-->
     <table>
     
-    <tr> {% for field in form %}
+    <tr> {% for field in form %} <!--loop for fields for form to use-->
         <td>{{field.label}}</td>
         <td>{{field}}</td>
     </tr> {% endfor %}
@@ -20,10 +20,10 @@
         <td></td>
         <td>
         <input type='submit' name='Add Event' value="Add Event">
-        </td>
+        </td> <!--formatted submit form in separate row-->
     </tr>
     
     </table>
 </form>
 Please Note: If venue is not listed in drop down above, please add venue to database first <a href="{% url 'create_venue' %}">here</a> or using the link above.
-{% endblock %}
+{% endblock %} <!--venue is a required field to add a new event. provides user direction-->

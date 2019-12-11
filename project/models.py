@@ -5,12 +5,12 @@ from django.urls import reverse
 class Event(models.Model):
     '''Stores information about each event including time, venue (fk) and dances available'''
     eventname = models.TextField()
-    venue = models.ForeignKey('Venue', on_delete=models.CASCADE)
-    date = models.DateField()
+    venue = models.ForeignKey('Venue', on_delete=models.CASCADE) #takes fk from Venue Model
+    date = models.DateField() #model fields to be collected under forms
     date_time = models.TimeField(blank=True)
     website = models.URLField(blank=True)
     image = models.URLField(blank=True)
-    dances = models.ManyToManyField('Dance')
+    dances = models.ManyToManyField('Dance') #MTM field of dances to allow multiple dance selections in Event page
     def showallevents(self):
         '''captures all event objects and sorts them by date'''
         event = Event.objects.all()
@@ -41,7 +41,7 @@ class Event(models.Model):
 class Venue(models.Model):
     '''Stores information about Venue location including photos and amenities available at the location'''
     venuename = models.TextField()
-    streetname = models.TextField()
+    streetname = models.TextField() #model fields to be collected under forms
     city = models.TextField()
     state = models.TextField()
     zipcode = models.TextField(blank=True)
@@ -69,7 +69,7 @@ class Venue(models.Model):
 class Dance(models.Model):
     '''Stores information about dance name and description along with a video example - foreign key for event model'''
     dance = models.TextField()
-    description = models.TextField()
+    description = models.TextField() #model fields added under ADMIN only
     video = models.URLField()
 
     def __str__(self):

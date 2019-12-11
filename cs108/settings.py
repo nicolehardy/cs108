@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'quotes',
     'mini_fb',
     'project',
-
 ]
 
 MIDDLEWARE = [

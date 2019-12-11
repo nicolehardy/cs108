@@ -1,20 +1,20 @@
-<!-- /templates/show_event_page.html-->
+<!-- /templates/project/show_event_page.html-->
 {% extends 'project/base.html' %}
 {% block content %}
 
 <center>
-<table border="10"> <!-- displays all profile information -->
+<table border="10"> <!-- displays all event information using detail view -->
     
     <tr>
         <td> <center>
-            <h2 style="font-size: xx-large; color: forestgreen;">{{event_page.eventname}} </h2>  
+            <h2 style="font-size: xx-large; color: forestgreen;">{{event_page.eventname}} </h2>  <!--displays name of event inputted by user-->
         </center>
         </td>
     </tr>
 
     <tr> 
         
-        <td><center><img src= "{{event_page.image}}" style="max-width: 500;"></td> 
+        <td><center><img src= "{{event_page.image}}" style="max-width: 500;"></td>  <!--user inputted image of event-->
         </center>
     </tr> 
     <tr>
@@ -28,13 +28,13 @@
     </center>
     </tr>
 </table>
-<td><center><a href="{% url 'update_event' event_page.pk %}">UPDATE THIS EVENT</a></center></td>
+<td><center><a href="{% url 'update_event' event_page.pk %}">UPDATE THIS EVENT</a></center></td> <!--provides user option to update event details-->
 <br>
 
 <table border="1">
     <tr>
         <td>
-            <center><i><h3>VENUE</h3></i></center>
+            <center><i><h3>VENUE</h3></i></center> <!--table to display venue information of event - provides link to see venue page-->
         </td>
         <td><center><i><h3>EVENT INFORMATION</h3></i></center></td>
     </tr>
@@ -57,7 +57,7 @@
     </td>
 
         <p>
-        <h2><b>Dances Available:</b></h2> 
+        <h2><b>Dances Available:</b></h2> <!--displays event dances available along with descriptions and example videos using a for loop-->
         {% for dances_available in event_page.get_dances %} 
         <hr>
         <h3>{{dances_available.dance}}</h3> <br>
