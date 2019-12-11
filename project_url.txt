@@ -1,1 +1,1 @@
-https://immense-spire-20326.herokuapp.com/project/
+https://immense-spire-20326.herokuapp.com/project/event_list
